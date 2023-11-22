@@ -61,17 +61,6 @@ public class Client {
         userDetails.userName = scannerObj.nextLine();
         System.out.printf("Enter password = ");
         userDetails.password = passwordConversion(scannerObj.nextLine());
-        System.out.println("1. Management\n2. Service technician\n3. Power User\n4. Ordinary User");
-        System.out.printf("Enter User Role = ");
-        int uRole = Integer.parseInt(scannerObj.nextLine());
-        if (uRole == 1)
-            userDetails.userRole = UserDetails.ulManager;
-        else if (uRole==2)
-            userDetails.userRole = UserDetails.ulServiceTech;
-        else if (uRole == 3)
-            userDetails.userRole = UserDetails.ulPUser;
-        else
-            userDetails.userRole = UserDetails.ulOUser;
         int choice = 0, ulevelArr[] = new int[9],i=0;
         do {
             System.out.printf("%n1.Print%n2.Queue%n3.Top Queue%n4.Start%n5.Stop%n6.Restart%n7.Status%n8.Read Config%n9.Set Config%n0.Exit%n");

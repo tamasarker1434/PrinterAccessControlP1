@@ -46,16 +46,12 @@ public class PrintServices extends UnicastRemoteObject implements IPrintServices
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
-                //if (resultSet.getString("userid").equals(userId) && resultSet.getString("password").equals(password)) {
                 Random random = new Random();
                 int sessionId = random.nextInt();
                 session =Integer.toString(sessionId);
                 sessionHashMap.put(session,System.nanoTime());
                 userDetails.userId = resultSet.getInt("id");
-                //userDetails.userRoleId = resultSet.getInt("ulevel");
-                userDetails.userRole = resultSet.getString("ulevel");
                 functionAccesed.put(resultSet.getInt("functionid"), resultSet.getString("functiontitle"));
-                //}
             }
 
             if ( userDetails.userId == 0)
@@ -162,8 +158,8 @@ public class PrintServices extends UnicastRemoteObject implements IPrintServices
     public boolean singnUpUser(UserDetails userDetails, int ulUserArr[]){
         boolean result = false;
         String url = "jdbc:mysql://localhost:3306/jdbcprinterdbp1", username ="root", dbPassword="";
-        String queryf, query = "INSERT INTO `userprofile` (`id`, `userid`, `password`, `ulevel`, `activeuser`) \n" +
-                "VALUES (NULL, '"+userDetails.userName+"', '"+userDetails.password+"', '"+userDetails.userRole+"', '1');";
+        String queryf, query = "INSERT INTO `userprofile` (`id`, `userid`, `password`, `activeuser`) \n" +
+                "VALUES (NULL, '"+userDetails.userName+"', '"+userDetails.password+"', '1');";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url,username,dbPassword);
